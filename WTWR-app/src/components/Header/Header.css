@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  max-height: 40px;
+}
+
+.header__group {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.header__logo {
+  width: 89px;
+  height: 40px;
+}
+
+.header__text {
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0;
+  align-self: center;
+}
+
+.header__add-btn {
+  border: none;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.header__add-btn:hover {
+  cursor: pointer;
+}
+
+.header__user-info {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 12px;
+}
+
+.header__userpic {
+  height: 40px;
+  width: 40px;
+}
