@@ -1,0 +1,20 @@
+.modal__close_type_item-modal {
+  background-image: url(../../images/modal-close-img.svg);
+}
+
+.modal__image {
+  margin: -28px -28px 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.modal__item-name {
+  margin: 20px 0 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.modal__item-weather {
+  margin: 12px 0 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
