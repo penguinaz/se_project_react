@@ -2,7 +2,7 @@ import "./Header.css";
 import headerLogo from "../../images/wtwr°.svg";
 import userPicture from "../../images/terrence_pfp.svg";
 
-function Header({ handleAddBtnClick }) {
+function Header({ location, handleAddBtnClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -12,7 +12,9 @@ function Header({ handleAddBtnClick }) {
     <header className="header">
       <div className="header__group">
         <img className="header__logo" src={headerLogo} alt="WTWR logo" />
-        <p className="header__text">{currentDate}, Bel Air</p>
+        <p className="header__text">
+          {currentDate}, {location}
+        </p>
       </div>
       <div className="header__group">
         <button

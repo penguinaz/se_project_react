@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -6,11 +6,23 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-
-import { defaultClothingItems } from "../../utils/constants";
+import {
+  getWeather,
+  getWeatherType,
+  assessWeatherCode,
+} from "../../utils/weatherApi";
+import {
+  defaultClothingItems,
+  weatherApiReqStrings,
+} from "../../utils/constants";
 
 function App() {
-  const [weatherData, setWeatherData] = useState({ type: "hot" });
+  const [weatherData, setWeatherData] = useState({
+    temp: "",
+    type: "",
+    weatherState: "",
+    location: "",
+  });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   // for testing item modal
@@ -43,12 +55,36 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    getWeather(weatherApiReqStrings)
+      .then((data) => {
+        console.log(data);
+        setWeatherData({
+          temp: data.main.temp,
+          type: getWeatherType(data.main.temp),
+          weatherState: assessWeatherCode(data.weather[0].id),
+          location: data.name,
+        });
+        console.log(weatherData.location);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return (
     <>
       <div className="page">
         <div className="page__content">
-          <Header handleAddBtnClick={handleAddBtnClick} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Header
+            location={weatherData.location}
+            handleAddBtnClick={handleAddBtnClick}
+          />
+          <Main
+            defaultClothingItems={defaultClothingItems}
+            weatherData={weatherData}
+            handleCardClick={handleCardClick}
+          />
           <Footer />
         </div>
         <ItemModal
