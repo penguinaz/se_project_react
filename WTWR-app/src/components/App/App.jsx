@@ -6,6 +6,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import MenuModal from "../MenuModal/MenuModal";
 import {
   getWeather,
   getWeatherType,
@@ -36,6 +37,10 @@ function App() {
     setActiveModal("view-card");
   };
 
+  const handleMenuClick = () => {
+    setActiveModal("mobile-menu");
+  };
+
   const handleCloseClick = () => {
     setActiveModal("");
   };
@@ -58,14 +63,12 @@ function App() {
   useEffect(() => {
     getWeather(weatherApiReqStrings)
       .then((data) => {
-        console.log(data);
         setWeatherData({
           temp: data.main.temp,
           type: getWeatherType(data.main.temp),
           weatherState: assessWeatherCode(data.weather[0].id),
           location: data.name,
         });
-        console.log(weatherData.location);
       })
       .catch((err) => {
         console.error(err);
@@ -79,6 +82,7 @@ function App() {
           <Header
             location={weatherData.location}
             handleAddBtnClick={handleAddBtnClick}
+            handleMenuClick={handleMenuClick}
           />
           <Main
             defaultClothingItems={defaultClothingItems}
@@ -87,6 +91,10 @@ function App() {
           />
           <Footer />
         </div>
+        <MenuModal
+          activeModal={activeModal}
+          handleCloseClick={handleCloseClick}
+        />
         <ItemModal
           activeModal={activeModal}
           handleCloseClick={handleCloseClick}

@@ -12,6 +12,19 @@
   column-gap: 20px;
 }
 
+.header__mobile-menu {
+  color: #f3f3f3;
+  background-image: url("../../images/mobile-menu-img.svg");
+  background-position: center;
+  padding: 0;
+  object-fit: cover;
+  border: none;
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  visibility: hidden;
+}
+
 .header__logo {
   width: 89px;
   height: 40px;
@@ -25,6 +38,7 @@
 }
 
 .header__add-btn {
+  background-color: #f3f3f3;
   border: none;
   font-family: "Cabinet Grotesk";
   font-weight: 700;
@@ -45,4 +59,28 @@
 .header__userpic {
   height: 40px;
   width: 40px;
+}
+@media screen and (max-width: 705px) {
+  .header {
+    margin-top: 18px;
+    max-height: 100px;
+  }
+
+  .header__mobile-menu {
+    visibility: visible;
+    align-self: flex-start;
+  }
+
+  .header__group {
+    flex-direction: column;
+  }
+
+  .header__group-user-info {
+    visibility: hidden;
+    position: absolute;
+  }
+
+  .header__text {
+    margin-top: 32px;
+  }
 }

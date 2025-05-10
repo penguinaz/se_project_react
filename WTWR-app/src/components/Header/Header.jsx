@@ -2,7 +2,7 @@ import "./Header.css";
 import headerLogo from "../../images/wtwr°.svg";
 import userPicture from "../../images/terrence_pfp.svg";
 
-function Header({ location, handleAddBtnClick }) {
+function Header({ location, handleAddBtnClick, handleMenuClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -16,7 +16,12 @@ function Header({ location, handleAddBtnClick }) {
           {currentDate}, {location}
         </p>
       </div>
-      <div className="header__group">
+      <button
+        onClick={handleMenuClick}
+        type="button"
+        className="header__mobile-menu"
+      ></button>
+      <div className="header__group header__group-user-info">
         <button
           onClick={handleAddBtnClick}
           type="button"

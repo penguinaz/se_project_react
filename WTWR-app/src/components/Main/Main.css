@@ -14,3 +14,13 @@
   gap: 20px;
   flex-wrap: wrap;
 }
+
+@media screen and (max-width: 705px) {
+  .card__text {
+    margin: 32px auto 20px;
+  }
+
+  .cards__list {
+    gap: 15px;
+  }
+}

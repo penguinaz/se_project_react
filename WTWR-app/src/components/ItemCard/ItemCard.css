@@ -26,3 +26,10 @@
   object-fit: cover;
   overflow: hidden;
 }
+
+@media screen and (max-width: 705px) {
+  .card {
+    width: 164px;
+    height: 164px;
+  }
+}
