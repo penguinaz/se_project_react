@@ -106,7 +106,7 @@ function App() {
           title="New garment"
           name="add-garment"
           buttonText="Add garment"
-          activeModal={activeModal}
+          isOpen={activeModal === "add-garment"}
           handleCloseClick={handleCloseClick}
           handleEscPress={handleEscPress}
           handleMouseDown={handleMouseDown}
@@ -137,6 +137,7 @@ function App() {
             >
               <input
                 type="radio"
+                name="radio"
                 id="hot"
                 className="modal__input modal__input_type_radio"
               />{" "}
@@ -148,6 +149,7 @@ function App() {
             >
               <input
                 type="radio"
+                name="radio"
                 id="warm"
                 className="modal__input modal__input_type_radio"
               />{" "}
@@ -159,6 +161,7 @@ function App() {
             >
               <input
                 type="radio"
+                name="radio"
                 id="cold"
                 className="modal__input modal__input_type_radio"
               />{" "}

@@ -7,7 +7,7 @@ function ModalWithForm({
   handleCloseClick,
   handleEscPress,
   handleMouseDown,
-  activeModal,
+  isOpen,
   children,
 }) {
   document.addEventListener("keydown", handleEscPress);
@@ -15,7 +15,7 @@ function ModalWithForm({
   return (
     <div
       onMouseDown={handleMouseDown}
-      className={`modal ${activeModal === "add-garment" && "modal_opened"}`}
+      className={`modal ${isOpen && "modal_opened"}`}
     >
       <div className="modal__content">
         <button
