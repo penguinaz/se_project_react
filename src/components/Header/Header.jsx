@@ -16,11 +16,6 @@ function Header({ location, handleAddBtnClick, handleMenuClick }) {
           {currentDate}, {location}
         </p>
       </div>
-      <button
-        onClick={handleMenuClick}
-        type="button"
-        className="header__mobile-menu"
-      ></button>
       <div className="header__group header__group-user-info">
         <button
           onClick={handleAddBtnClick}

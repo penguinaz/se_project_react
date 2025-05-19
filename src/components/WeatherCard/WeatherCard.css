@@ -24,9 +24,3 @@
   object-position: right top;
   border-radius: 12px;
 }
-
-@media screen and (max-width: 705px) {
-  .weather-card {
-    margin-top: 16px;
-  }
-}
