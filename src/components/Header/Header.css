@@ -4,11 +4,13 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   max-height: 40px;
+  margin-top: 32px;
 }
 
 .header__group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   column-gap: 20px;
 }
 

@@ -1,8 +1,9 @@
 import "./Header.css";
 import headerLogo from "../../images/wtwr°.svg";
 import userPicture from "../../images/terrence_pfp.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ location, handleAddBtnClick, handleMenuClick }) {
+function Header({ location, handleAddBtnClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -17,6 +18,7 @@ function Header({ location, handleAddBtnClick, handleMenuClick }) {
         </p>
       </div>
       <div className="header__group header__group-user-info">
+        <ToggleSwitch />
         <button
           onClick={handleAddBtnClick}
           type="button"
