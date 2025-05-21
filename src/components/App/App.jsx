@@ -18,7 +18,6 @@ import {
 } from "../../utils/constants";
 
 function App() {
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [weatherData, setWeatherData] = useState({
     temp: "",
     type: "",
@@ -86,7 +85,7 @@ function App() {
             handleMenuClick={handleMenuClick}
           />
           <Main
-            clothingItems={clothingItems}
+            defaultClothingItems={defaultClothingItems}
             weatherData={weatherData}
             handleCardClick={handleCardClick}
           />
