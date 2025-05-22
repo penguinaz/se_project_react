@@ -39,6 +39,11 @@
   cursor: pointer;
 }
 
+.header__link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header__user-info {
   display: flex;
   justify-content: space-between;
