@@ -21,7 +21,7 @@ function Main({ defaultClothingItems, weatherData, handleCardClick }) {
         <ul className="cards__list">
           {defaultClothingItems
             .filter((item) => {
-              return item.weather === "hot"; // weatherData.type;
+              return item.weather === weatherData.type; // weatherData.type;
             })
             .map((item) => {
               return (

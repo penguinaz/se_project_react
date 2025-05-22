@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
@@ -96,11 +97,15 @@ function App() {
               handleAddBtnClick={handleAddBtnClick}
               handleMenuClick={handleMenuClick}
             />
-            <Main
+            <Profile
+              clothingItems={clothingItems}
+              handleCardClick={handleCardClick}
+            />
+            {/* <Main
               defaultClothingItems={clothingItems}
               weatherData={weatherData}
               handleCardClick={handleCardClick}
-            />
+            /> */}
             <Footer />
           </div>
           <ItemModal

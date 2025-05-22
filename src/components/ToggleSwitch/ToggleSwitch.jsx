@@ -11,6 +11,7 @@ function ToggleSwitch() {
     <label className="toggle-btn">
       <input
         onChange={handleToggleSwitchChange}
+        value={currentTempUnit}
         type="checkbox"
         className="toggle-btn__checkbox"
       />

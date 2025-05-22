@@ -1,0 +1,33 @@
+.collection {
+  max-width: 1020px;
+}
+
+.collection__header {
+  margin-top: 47px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: "Cabinet Grotesk", Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.collection__add-btn {
+  border: none;
+  color: #00000099;
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+.collection__add-btn:hover {
+  color: #00000050;
+}
+
+.collection__list {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
