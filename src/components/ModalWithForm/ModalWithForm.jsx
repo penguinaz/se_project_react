@@ -7,6 +7,7 @@ function ModalWithForm({
   handleCloseClick,
   handleEscPress,
   handleMouseDown,
+  handleSubmit,
   isOpen,
   children,
 }) {
@@ -24,9 +25,15 @@ function ModalWithForm({
           className="modal__close"
         ></button>
         <h3 className="modal__title">{title}</h3>
-        <form className={`modal__form modal__form_type_${name}`}>
+        <form
+          noValidate
+          onSubmit={handleSubmit}
+          className={`modal__form modal__form_type_${name}`}
+        >
           {children}
-          <button className="modal__submit">{buttonText}</button>
+          <button type="submit" className="modal__submit">
+            {buttonText}
+          </button>
         </form>
       </div>
     </div>

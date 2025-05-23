@@ -6,7 +6,6 @@ function ToggleSwitch() {
   const { handleToggleSwitchChange, currentTempUnit } = useContext(
     CurrentTempUnitContext
   );
-  console.log(currentTempUnit);
   return (
     <label className="toggle-btn">
       <input

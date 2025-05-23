@@ -6,7 +6,6 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import {
@@ -18,6 +17,7 @@ import {
   defaultClothingItems,
   weatherApiReqStrings,
 } from "../../utils/constants";
+import AddItemModal from "../AddItemModal/AddItemModal";
 
 function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
@@ -68,6 +68,18 @@ function App() {
     }
   };
 
+  const handleAddItemSubmit = (name, weatherType, imageUrl) => {
+    setClothingItems([
+      ...clothingItems,
+      {
+        _id: clothingItems.length,
+        name: name,
+        weather: weatherType,
+        link: imageUrl,
+      },
+    ]);
+  };
+
   useEffect(() => {
     getWeather(weatherApiReqStrings)
       .then((data) => {
@@ -103,7 +115,7 @@ function App() {
                 path="/"
                 element={
                   <Main
-                    defaultClothingItems={clothingItems}
+                    clothingItems={clothingItems}
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                   />
@@ -129,73 +141,14 @@ function App() {
             handleMouseDown={handleMouseDown}
             card={selectedCard}
           />
-          <ModalWithForm
-            title="New garment"
-            name="add-garment"
-            buttonText="Add garment"
+
+          <AddItemModal
             isOpen={activeModal === "add-garment"}
             handleCloseClick={handleCloseClick}
             handleEscPress={handleEscPress}
             handleMouseDown={handleMouseDown}
-          >
-            <label htmlFor="name" className="modal__label">
-              Name
-              <input
-                type="text"
-                id="name"
-                placeholder="Name"
-                className="modal__input"
-              />
-            </label>
-            <label htmlFor="imageUrl" className="modal__label">
-              Image
-              <input
-                type="url"
-                id="imageUrl"
-                placeholder="Image URL"
-                className="modal__input"
-              />
-            </label>
-            <fieldset className="modal__radio-buttons">
-              <legend className="modal__legend">Set the weather type:</legend>
-              <label
-                htmlFor="hot"
-                className="modal__label modal__label_type_radio"
-              >
-                <input
-                  type="radio"
-                  name="radio"
-                  id="hot"
-                  className="modal__input modal__input_type_radio"
-                />{" "}
-                Hot
-              </label>
-              <label
-                htmlFor="warm"
-                className="modal__label modal__label_type_radio"
-              >
-                <input
-                  type="radio"
-                  name="radio"
-                  id="warm"
-                  className="modal__input modal__input_type_radio"
-                />{" "}
-                Warm
-              </label>
-              <label
-                htmlFor="cold"
-                className="modal__label modal__label_type_radio"
-              >
-                <input
-                  type="radio"
-                  name="radio"
-                  id="cold"
-                  className="modal__input modal__input_type_radio"
-                />{" "}
-                Cold
-              </label>
-            </fieldset>
-          </ModalWithForm>
+            handleAddItemSubmit={handleAddItemSubmit}
+          />
         </div>
       </CurrentTempUnitContext.Provider>
     </>

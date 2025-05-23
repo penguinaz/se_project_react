@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import "./WeatherCard.css";
 import cloudy from "../../images/weather-card-backdrop-cloudy.svg";
