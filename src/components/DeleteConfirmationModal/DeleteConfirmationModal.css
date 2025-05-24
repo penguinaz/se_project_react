@@ -1,0 +1,30 @@
+.modal__content_delete {
+  width: 670px;
+  padding: 0;
+}
+
+.modal__delete-title {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.modal__delete-confirm-btn {
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #ff4d00;
+  margin-bottom: 24px;
+}
+
+.modal__delete-cancel-btn {
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 60px;
+}

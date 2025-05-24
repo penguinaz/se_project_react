@@ -9,7 +9,7 @@ function ItemCard({ item, handleCardClick }) {
           handleCardClick(item);
         }}
         className="card__image"
-        src={item.link}
+        src={item.imageUrl}
         alt={item.name}
       />
     </div>

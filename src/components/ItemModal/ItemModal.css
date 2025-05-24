@@ -1,10 +1,15 @@
-.modal__close_type_item-modal {
-  background-image: url(../../images/modal-close-img.svg);
+.modal__close_type_item {
+  background-image: url("../../images/modal-close-img.svg");
 }
 
 .modal__image {
   margin: -28px -28px 0;
   border-radius: 20px 20px 0 0;
+}
+
+.modal__options {
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal__item-name {
@@ -17,4 +22,15 @@
   margin: 12px 0 0;
   font-size: 20px;
   line-height: 1.2;
+}
+
+.modal__delete-btn {
+  align-self: flex-start;
+  margin-top: 20px;
+  border: none;
+  color: #ff4d00;
+  font-size: 20px;
+  line-height: 1.2;
+  background-color: #ffffff;
+  font-weight: 700;
 }

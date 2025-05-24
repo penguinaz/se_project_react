@@ -8,7 +8,7 @@ const checkResponse = (res) => {
 export const getWeatherType = (temp) => {
   if (temp >= 80) {
     return "hot";
-  } else if (temp >= 68) {
+  } else if (temp >= 60) {
     return "warm";
   } else {
     return "cold";

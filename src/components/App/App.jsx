@@ -13,15 +13,14 @@ import {
   getWeatherType,
   assessWeatherCode,
 } from "../../utils/weatherApi";
-import {
-  defaultClothingItems,
-  weatherApiReqStrings,
-} from "../../utils/constants";
+import { getClothing, postClothing, deleteClothing } from "../../utils/api";
+import { weatherApiReqStrings } from "../../utils/constants";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 
 function App() {
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
     temp: { F: "", C: "" },
     type: "",
@@ -45,8 +44,22 @@ function App() {
     setActiveModal("view-card");
   };
 
-  const handleMenuClick = () => {
-    setActiveModal("mobile-menu");
+  const openConfirmationModal = () => {
+    setActiveModal("delete-confirm");
+  };
+
+  const handleCardDelete = () => {
+    console.log(selectedCard._id);
+    deleteClothing(selectedCard._id)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((item) => {
+            item._id !== selectedCard._id;
+          })
+        );
+        setActiveModal("");
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleCloseClick = () => {
@@ -69,15 +82,17 @@ function App() {
   };
 
   const handleAddItemSubmit = (name, weatherType, imageUrl) => {
-    setClothingItems([
-      ...clothingItems,
-      {
-        _id: clothingItems.length,
-        name: name,
-        weather: weatherType,
-        link: imageUrl,
-      },
-    ]);
+    postClothing({ name, imageUrl, weatherType }).then(() => {
+      setClothingItems([
+        {
+          _id: crypto.randomUUID(),
+          name: name,
+          weather: weatherType,
+          imageUrl: imageUrl,
+        },
+        ...clothingItems,
+      ]);
+    });
   };
 
   useEffect(() => {
@@ -93,10 +108,13 @@ function App() {
           location: data.name,
         });
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+      .catch((err) => console.error(err));
+    getClothing()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((err) => console.error(err));
+  }, [clothingItems]);
 
   return (
     <>
@@ -108,7 +126,6 @@ function App() {
             <Header
               location={weatherData.location}
               handleAddBtnClick={handleAddBtnClick}
-              handleMenuClick={handleMenuClick}
             />
             <Routes>
               <Route
@@ -140,6 +157,7 @@ function App() {
             handleEscPress={handleEscPress}
             handleMouseDown={handleMouseDown}
             card={selectedCard}
+            openConfirmationModal={openConfirmationModal}
           />
 
           <AddItemModal
@@ -148,6 +166,13 @@ function App() {
             handleEscPress={handleEscPress}
             handleMouseDown={handleMouseDown}
             handleAddItemSubmit={handleAddItemSubmit}
+          />
+          <DeleteConfirmationModal
+            isOpen={activeModal === "delete-confirm"}
+            handleCardDelete={handleCardDelete}
+            handleCloseClick={handleCloseClick}
+            handleEscPress={handleEscPress}
+            handleMouseDown={handleMouseDown}
           />
         </div>
       </CurrentTempUnitContext.Provider>
