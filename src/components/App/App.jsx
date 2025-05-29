@@ -29,6 +29,7 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+
   // for testing item modal
 
   const handleToggleSwitchChange = () => {
@@ -49,13 +50,10 @@ function App() {
   };
 
   const handleCardDelete = () => {
-    console.log(selectedCard._id);
     deleteClothing(selectedCard._id)
       .then(() => {
         setClothingItems(
-          clothingItems.filter((item) => {
-            item._id !== selectedCard._id;
-          })
+          clothingItems.filter((item) => item._id !== selectedCard._id)
         );
         setActiveModal("");
       })
@@ -82,10 +80,15 @@ function App() {
   };
 
   const handleAddItemSubmit = (name, weatherType, imageUrl) => {
-    postClothing({ name, imageUrl, weatherType }).then(() => {
+    let currentMaxId = clothingItems.reduce(
+      (max, item) => (item._id > max ? item._id : max),
+      0
+    );
+    console.log(currentMaxId);
+    postClothing({ name, imageUrl, weatherType, currentMaxId }).then(() => {
       setClothingItems([
         {
-          _id: crypto.randomUUID(),
+          _id: ++currentMaxId,
           name: name,
           weather: weatherType,
           imageUrl: imageUrl,
@@ -114,7 +117,7 @@ function App() {
         setClothingItems(data);
       })
       .catch((err) => console.error(err));
-  }, [clothingItems]);
+  }, []);
 
   return (
     <>
