@@ -4,11 +4,8 @@ function DeleteConfirmationModal({
   isOpen,
   handleCardDelete,
   handleCloseClick,
-  handleEscPress,
   handleMouseDown,
 }) {
-  document.addEventListener("keydown", handleEscPress);
-
   return (
     <div
       onMouseDown={handleMouseDown}

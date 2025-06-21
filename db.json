@@ -89,6 +89,11 @@
       "name": "Sweatshirt",
       "weather": "warm",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sweatshirt.png?etag=008a9674757bea2e0bdb31242e364be0"
+    },
+    {
+      "name": "test",
+      "imageUrl": "https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630",
+      "_id": 16
     }
   ]
 }

@@ -3,13 +3,10 @@ import "./ItemModal.css";
 function ItemModal({
   activeModal,
   handleCloseClick,
-  handleEscPress,
   handleMouseDown,
   openConfirmationModal,
   card,
 }) {
-  document.addEventListener("keydown", handleEscPress);
-
   return (
     <div
       onMouseDown={handleMouseDown}

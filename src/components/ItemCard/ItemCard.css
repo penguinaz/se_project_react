@@ -7,6 +7,7 @@
   align-items: center;
   border: 1px solid #0000004d;
   border-radius: 19px;
+  overflow: hidden;
 }
 
 .card__title {
@@ -22,8 +23,8 @@
 }
 
 .card__image {
+  background-position: center;
+  background-size: cover;
   width: 100%;
-  object-fit: cover;
-  overflow: hidden;
-  border-radius: 19px;
+  height: 100%;
 }

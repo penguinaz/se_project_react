@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 function AddItemModal({
   isOpen,
   handleCloseClick,
-  handleEscPress,
   handleMouseDown,
   handleAddItemSubmit,
 }) {
@@ -32,7 +31,6 @@ function AddItemModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCloseClick();
     handleAddItemSubmit(name, weatherType, imageUrl);
   };
 
@@ -43,7 +41,6 @@ function AddItemModal({
       buttonText="Add garment"
       isOpen={isOpen}
       handleCloseClick={handleCloseClick}
-      handleEscPress={handleEscPress}
       handleMouseDown={handleMouseDown}
       handleSubmit={handleSubmit}
     >

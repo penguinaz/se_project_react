@@ -7,6 +7,10 @@ const checkResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
+const request = (url, options) => {
+  return fetch(url, options).then((res) => checkResponse(res));
+};
+
 export const getClothing = () => {
   return fetch(`${baseUrl}/items`).then((res) => checkResponse(res));
 };

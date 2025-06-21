@@ -30,8 +30,6 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
-  // for testing item modal
-
   const handleToggleSwitchChange = () => {
     setCurrentTempUnit(currentTempUnit === "F" ? "C" : "F");
   };
@@ -64,18 +62,28 @@ function App() {
     setActiveModal("");
   };
 
-  const handleEscPress = (e) => {
-    if (e.key == "Escape") {
-      setActiveModal("");
-    }
-  };
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   const handleMouseDown = (e) => {
     if (
       e.target.classList.contains("modal_opened") ||
       e.target.classList.contains("modal__close")
     ) {
-      setActiveModal("");
+      handleCloseClick();
     }
   };
 
@@ -84,18 +92,20 @@ function App() {
       (max, item) => (item._id > max ? item._id : max),
       0
     );
-    console.log(currentMaxId);
-    postClothing({ name, imageUrl, weatherType, currentMaxId }).then(() => {
-      setClothingItems([
-        {
-          _id: ++currentMaxId,
-          name: name,
-          weather: weatherType,
-          imageUrl: imageUrl,
-        },
-        ...clothingItems,
-      ]);
-    });
+    postClothing({ name, imageUrl, weatherType, currentMaxId })
+      .then(() => {
+        setClothingItems([
+          {
+            _id: ++currentMaxId,
+            name: name,
+            weather: weatherType,
+            imageUrl: imageUrl,
+          },
+          ...clothingItems,
+        ]);
+        handleCloseClick();
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -120,66 +130,61 @@ function App() {
   }, []);
 
   return (
-    <>
-      <CurrentTempUnitContext.Provider
-        value={{ currentTempUnit, handleToggleSwitchChange }}
-      >
-        <div className="page">
-          <div className="page__content">
-            <Header
-              location={weatherData.location}
-              handleAddBtnClick={handleAddBtnClick}
+    <CurrentTempUnitContext.Provider
+      value={{ currentTempUnit, handleToggleSwitchChange }}
+    >
+      <div className="page">
+        <div className="page__content">
+          <Header
+            location={weatherData.location}
+            handleAddBtnClick={handleAddBtnClick}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  clothingItems={clothingItems}
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
             />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main
-                    clothingItems={clothingItems}
-                    weatherData={weatherData}
-                    handleCardClick={handleCardClick}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <Profile
-                    clothingItems={clothingItems}
-                    handleCardClick={handleCardClick}
-                    handleAddBtnClick={handleAddBtnClick}
-                  />
-                }
-              />
-            </Routes>
-            <Footer />
-          </div>
-          <ItemModal
-            activeModal={activeModal}
-            handleCloseClick={handleCloseClick}
-            handleEscPress={handleEscPress}
-            handleMouseDown={handleMouseDown}
-            card={selectedCard}
-            openConfirmationModal={openConfirmationModal}
-          />
-
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            handleCloseClick={handleCloseClick}
-            handleEscPress={handleEscPress}
-            handleMouseDown={handleMouseDown}
-            handleAddItemSubmit={handleAddItemSubmit}
-          />
-          <DeleteConfirmationModal
-            isOpen={activeModal === "delete-confirm"}
-            handleCardDelete={handleCardDelete}
-            handleCloseClick={handleCloseClick}
-            handleEscPress={handleEscPress}
-            handleMouseDown={handleMouseDown}
-          />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  handleCardClick={handleCardClick}
+                  handleAddBtnClick={handleAddBtnClick}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
         </div>
-      </CurrentTempUnitContext.Provider>
-    </>
+        <ItemModal
+          activeModal={activeModal}
+          handleCloseClick={handleCloseClick}
+          handleMouseDown={handleMouseDown}
+          card={selectedCard}
+          openConfirmationModal={openConfirmationModal}
+        />
+
+        <AddItemModal
+          isOpen={activeModal === "add-garment"}
+          handleCloseClick={handleCloseClick}
+          handleMouseDown={handleMouseDown}
+          handleAddItemSubmit={handleAddItemSubmit}
+        />
+        <DeleteConfirmationModal
+          isOpen={activeModal === "delete-confirm"}
+          handleCardDelete={handleCardDelete}
+          handleCloseClick={handleCloseClick}
+          handleMouseDown={handleMouseDown}
+        />
+      </div>
+    </CurrentTempUnitContext.Provider>
   );
 }
 
