@@ -53,7 +53,7 @@ function App() {
         setClothingItems(
           clothingItems.filter((item) => item._id !== selectedCard._id)
         );
-        setActiveModal("");
+        handleCloseClick();
       })
       .catch((err) => console.error(err));
   };
@@ -67,7 +67,7 @@ function App() {
 
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
-        handleCloseModal();
+        handleCloseClick();
       }
     };
 

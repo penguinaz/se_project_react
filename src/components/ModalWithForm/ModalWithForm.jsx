@@ -5,14 +5,11 @@ function ModalWithForm({
   name,
   buttonText,
   handleCloseClick,
-  handleEscPress,
   handleMouseDown,
   handleSubmit,
   isOpen,
   children,
 }) {
-  document.addEventListener("keydown", handleEscPress);
-
   return (
     <div
       onMouseDown={handleMouseDown}
